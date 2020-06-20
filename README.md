@@ -1,6 +1,6 @@
 # via_cep_brasil
 
-A new Flutter package project.
+Package para consulta de endereço via CEP, através do consumo de dados do webservice Via Cep.
 
 ## Getting Started
 

@@ -1,6 +1,6 @@
 name: via_cep_brasil
 description: Package para consulta de endereço via cep.
-version: 1.0.1
+version: 1.0.2
 author:
 homepage: https://github.com/Bruno-Sil/via_cep_brasil
 

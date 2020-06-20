@@ -1,6 +1,6 @@
-## [1.0.1] - Primeiro Release.
+## [1.0.2] - Primeiro Release.
 
-* Primeiro release.
+* Terceiro release.
 
-## [1.0.1] - TODO: Add release date.
+## [1.0.2] - TODO: Add release date.
 
