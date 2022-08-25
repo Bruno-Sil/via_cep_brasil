@@ -1,5 +1,6 @@
+import 'dart:convert';
 
-import 'package:via_cep_brasil/src/viacep_repository.dart';
+import 'viacep_repository.dart';
 
 class ViaCepSearch {
   final String cep;
@@ -12,49 +13,54 @@ class ViaCepSearch {
   final String ibge;
   final String gia;
 
-  ViaCepSearch(
-      {this.cep,
-      this.logradouro,
-      this.complemento,
-      this.bairro,
-      this.localidade,
-      this.uf,
-      this.unidade,
-      this.ibge,
-      this.gia});
+  ViaCepSearch({
+    required this.cep,
+    required this.logradouro,
+    required this.complemento,
+    required this.bairro,
+    required this.localidade,
+    required this.uf,
+    required this.unidade,
+    required this.ibge,
+    required this.gia,
+  });
 
-  factory ViaCepSearch.fromJson(Map<String, dynamic> json) {
+  Map<String, dynamic> toMap() {
+    final result = <String, dynamic>{};
+
+    result.addAll({'cep': cep});
+    result.addAll({'logradouro': logradouro});
+    result.addAll({'complemento': complemento});
+    result.addAll({'bairro': bairro});
+    result.addAll({'localidade': localidade});
+    result.addAll({'uf': uf});
+    result.addAll({'unidade': unidade});
+    result.addAll({'ibge': ibge});
+    result.addAll({'gia': gia});
+
+    return result;
+  }
+
+  factory ViaCepSearch.fromMap(Map<String, dynamic> map) {
     return ViaCepSearch(
-    cep : json['cep'],
-    logradouro : json['logradouro'],
-    complemento : json['complemento'],
-    bairro : json['bairro'],
-    localidade : json['localidade'],
-    uf : json['uf'],
-    unidade : json['unidade'],
-    ibge : json['ibge'],
-    gia : json['gia'],
+      cep: map['cep'] ?? '',
+      logradouro: map['logradouro'] ?? '',
+      complemento: map['complemento'] ?? '',
+      bairro: map['bairro'] ?? '',
+      localidade: map['localidade'] ?? '',
+      uf: map['uf'] ?? '',
+      unidade: map['unidade'] ?? '',
+      ibge: map['ibge'] ?? '',
+      gia: map['gia'] ?? '',
     );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['cep'] = this.cep;
-    data['logradouro'] = this.logradouro;
-    data['complemento'] = this.complemento;
-    data['bairro'] = this.bairro;
-    data['localidade'] = this.localidade;
-    data['uf'] = this.uf;
-    data['unidade'] = this.unidade;
-    data['ibge'] = this.ibge;
-    data['gia'] = this.gia;
-    return data;
+  String toJson() => json.encode(toMap());
 
-  }
+  factory ViaCepSearch.fromJson(String source) =>
+      ViaCepSearch.fromMap(json.decode(source));
 
- static Future<ViaCepSearch> getInstance(String cep) async {
-      return ViaCepRepository().getViacep(cep);
-    
+  static Future<ViaCepSearch> getInstance(String cep) async {
+    return ViaCepRepository().getViacep(cep);
   }
-  
-  }
+}
