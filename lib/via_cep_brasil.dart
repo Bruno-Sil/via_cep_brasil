@@ -1,3 +1,3 @@
 library via_cep_brasil;
 
-export 'src/model.dart';
+export 'src/viacep_search.dart';
