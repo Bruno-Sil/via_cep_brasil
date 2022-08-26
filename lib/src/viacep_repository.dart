@@ -1,15 +1,12 @@
-
-
 import 'package:dio/dio.dart';
 
-import 'model.dart';
+import 'viacep_search.dart';
 
 class ViaCepRepository {
-  
-Future<ViaCepSearch> getViacep(String cep) async {
-   var response = await Dio().get("https://viacep.com.br/ws/$cep/json/");
-      return ViaCepSearch.fromJson(response.data);
-    
-  }
+  final base = "https://viacep.com.br/ws";
 
+  Future<ViaCepSearch> getViacep(String cep) async {
+    final response = await Dio().get("$base/$cep/json/");
+    return ViaCepSearch.fromMap(response.data);
+  }
 }
